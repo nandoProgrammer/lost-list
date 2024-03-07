@@ -1,0 +1,45 @@
+<section>
+    <!--filters-->
+    <div class="container filters">
+        <form [formGroup]="formFilters" (ngSubmit)="filterRequest()">
+          <input type="text" formControlName="nome" />
+          <input type="number" formControlName="age" />
+          <select formControlName="sexo">
+            <option value="male">Maculino</option>
+            <option value="female">Feminino</option>
+          </select>
+          <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <!--card-->
+    <div class="container flex-row" style="gap: 10px">
+        <div 
+          *ngFor="let person of response.content | paginate: 
+            { 
+              itemsPerPage: pagination.itemsPerPage, 
+              currentPage: pagination.currentPage,
+              totalItems: pagination.totalElements
+            }" 
+          class="card-person" 
+          (click)="navigateByPerson(person.id)"
+        >
+            <img 
+              *ngIf="!!person.urlFoto" 
+              [src]="person.urlFoto" 
+              alt="foto da pessoa desaparecida ({{person.nome}})"
+              width="50"
+              height="auto"
+              loading="lazy"
+            />
+            <p><strong>Nome:</strong>{{person.nome}}</p>
+            <p><strong>Idade:</strong>{{person.idade}}</p>
+            <p><strong>Sexo:</strong>{{person.sexo}}</p>
+        </div>
+    </div>
+
+    <!--pagination-->
+    <div>
+        <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+    </div>
+</section>

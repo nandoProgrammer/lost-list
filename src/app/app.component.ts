@@ -10,5 +10,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'list-of-lost';
+  title = 'lista de desaparecidos Mato Grosso';
 }
