@@ -32,7 +32,6 @@ export class PersonComponent {
        .subscribe({
         next: (res) => {
           this.response = res;
-          console.log(res)
         },
         error: (error) => {
           throw new Error(error.message)
