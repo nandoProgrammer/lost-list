@@ -28,3 +28,24 @@
       transform: scale(0.95) rotateZ(1.7deg);
     }
 }
+
+form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.content-image {
+  min-height: 150px;
+}
+
+.card {
+  width: 24%;
+  min-width: 18rem;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    min-width: 100%;
+  }
+}

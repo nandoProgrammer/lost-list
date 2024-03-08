@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AbitusService } from '../../core/services/abitus.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-person',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './person.component.html',
   styleUrl: './person.component.scss'
 })
@@ -15,7 +16,8 @@ export class PersonComponent {
 
    constructor(
      private activatedRoute: ActivatedRoute,
-     private apiAbitusService: AbitusService
+     private apiAbitusService: AbitusService,
+     private router: Router
    ) {}
 
    ngOnInit():void {
@@ -36,5 +38,23 @@ export class PersonComponent {
           throw new Error(error.message)
         }
        })
+   }
+
+   get urlPage():string {
+     return window.location.href;
+   }
+
+   shareOn(share: "WHATSAPP" | "FACEBOOK"):void {
+    if(share == "WHATSAPP") {
+      window.open(`https://api.whatsapp.com/send?text=${this.urlPage}`, '_blank');
+    }
+
+    if(share == "FACEBOOK") {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${this.urlPage}`, '_blank');
+    }
+   }
+
+   navigateHome() {
+     this.router.navigate(['']);
    }
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -23,7 +24,9 @@ export class HomeComponent {
   filters: any = {
     sexo: '',
     nome: '',
-    pagina: ''
+    pagina: '',
+    faixaIdadeFinal: 0,
+    faixaIdadeInicial: 0
   };
 
   constructor(
@@ -63,7 +66,8 @@ export class HomeComponent {
   createForm():void {
      this.formFilters = this.formBuilder.group({
        nome: [''],
-       age: [''],
+       faixaIdadeFinal: [''],
+       faixaIdadeInicial: [''],
        sexo: ['']
      });
   }

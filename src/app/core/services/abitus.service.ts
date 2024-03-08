@@ -13,8 +13,8 @@ export class AbitusService {
 
   getAllPerson(filters: any): Observable<any> {
     const params = new HttpParams()
-      .set('faixaIdadeInicial', '0')
-      .set('faixaIdadeFinal', '0')
+      .set('faixaIdadeInicial', filters.faixaIdadeInicial)
+      .set('faixaIdadeFinal', filters.faixaIdadeFinal)
       .set('status', 'DESAPARECIDO')
       .set('porPagina', '12')
       .set('nome', filters.nome)
