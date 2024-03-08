@@ -10,12 +10,12 @@
           
           <div class="form-group mb-2">
             <label for="idadeInicial" class="sr-only">Idade Inicial</label>
-            <input type="number" class="form-control form-control-plaintext" id="idadeInicial" formControlName="faixaIdadeInicial" placeholder="Digite...">
+            <input type="number" class="form-control form-control-plaintext" min="0" id="idadeInicial" formControlName="faixaIdadeInicial" placeholder="Digite...">
           </div>
   
           <div class="form-group mb-2">
             <label for="idadeFinal" class="sr-only">Idade Final</label>
-            <input type="number" class="form-control form-control-plaintext" id="idadeFinal" formControlName="faixaIdadeFinal" placeholder="Digite...">
+            <input type="number" class="form-control form-control-plaintext" min="0" id="idadeFinal" formControlName="faixaIdadeFinal" placeholder="Digite...">
           </div>
           
           <div class="form-group mb-2">
@@ -27,7 +27,7 @@
             </select>
           </div>
   
-          <button type="submit" class="btn btn-primary mb-2 mt-4">Enviar</button>
+          <button type="submit" class="btn btn-primary mb-2 mt-4">Filtrar</button>
         </form>
       </div>
     </div>
