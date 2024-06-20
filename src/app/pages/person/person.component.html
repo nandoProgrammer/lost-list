@@ -1,124 +1,183 @@
 <section>
-    <div class="container py-5">
-       <div class="row">
-          <div class="col">
-             <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-                <ol class="breadcrumb mb-0">
-                   <li class="breadcrumb-item"><a (click)="navigateHome()">Home</a></li>
-                   <li class="breadcrumb-item active" aria-current="page">Perfil da Pessoa</li>
-                </ol>
-             </nav>
-          </div>
-       </div>
-       <div class="row">
-          <div class="col-lg-4">
-             <div class="card mb-4">
-                <div class="card-body text-center">
-                   <img *ngIf="response?.urlFoto" [src]="response?.urlFoto" alt="avatar"
-                      class="rounded-circle img-fluid" style="width: 150px;">
-                   <img *ngIf="!response?.urlFoto" src="r../../../../../assets/images/Unknown_person.jpg" alt="avatar"
-                      class="rounded-circle img-fluid" style="width: 150px;">
-                   <h5 class="my-3">{{response?.nome || 'Não Possui'}}</h5>
-                </div>
-             </div>
-          </div>
-          <div class="col-lg-8">
-             <div class="card mb-4">
-                <div class="card-body">
-                   <div class="row">
-                      <div class="col-sm-3">
-                         <p class="mb-0">Nome:</p>
-                      </div>
-                      <div class="col-sm-9">
-                         <p class="text-muted mb-0">{{response?.nome || 'Não Possui'}}</p>
-                      </div>
-                   </div>
-                   <hr>
-                   <div class="row">
-                      <div class="col-sm-3">
-                         <p class="mb-0">Idade:</p>
-                      </div>
-                      <div class="col-sm-9">
-                         <p class="text-muted mb-0">{{response?.idade || 'Não Possui'}}</p>
-                      </div>
-                   </div>
-                   <hr>
-                   <div class="row">
-                      <div class="col-sm-3">
-                         <p class="mb-0">Sexo:</p>
-                      </div>
-                      <div class="col-sm-9">
-                         <p class="text-muted mb-0">{{response?.sexo || 'Não Possui'}}</p>
-                      </div>
-                   </div>
-                   <hr>
-                   <div class="row">
-                     <div class="col-sm-3">
-                        <p class="mb-0">Vivo:</p>
-                     </div>
-                     <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{(response?.vivo ? 'Sim' : 'Não') || 'Não Possui'}}</p>
-                     </div>
-                   </div>
-                   <hr>
-                   <div class="row">
-                     <div class="col-sm-3">
-                        <p class="mb-0">Data Desaparecimento:</p>
-                     </div>
-                     <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{(response?.ultimaOcorrencia?.dtDesaparecimento | date: 'dd/MM/yyyy') || 'Não Possui'}}</p>
-                     </div>
-                   </div>
-                   <hr>
-                   <div class="row">
-                     <div class="col-sm-3">
-                        <p class="mb-0">Encontrado/Encontrado vivo:</p>
-                     </div>
-                     <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{(response?.ultimaOcorrencia?.encontradoVivo ? 'Sim' : 'Não') || 'Não Possui'}}</p>
-                     </div>
-                   </div>
-                   <hr>
-                   <div class="row">
-                     <div class="col-sm-3">
-                        <p class="mb-0">Local Desaparecimento:</p>
-                     </div>
-                     <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{response?.ultimaOcorrencia?.localDesaparecimentoConcat || 'Não Possui'}}</p>
-                     </div>
-                   </div>
-                   <ng-container *ngIf="!!response?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO">
-                   <hr>
-                   <div class="row">
-                     <div class="col-sm-3">
-                        <p class="mb-0">Infomação:</p>
-                     </div>
-                     <div class="col-sm-9">
-                        <p class="text-muted mb-0" *ngIf="response?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.informacao">
-                           {{response?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.informacao || 'Não Possui'}}
-                        </p>
-                        <p class="text-muted mb-0  mt-1" *ngIf="response?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.vestimentasDesaparecido">
-                           Descrição: {{response?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.vestimentasDesaparecido || 'Não Possui'}}
-                        </p>
-                     </div>
-                   </div>
-                   </ng-container>
-                </div>
-             </div>
-          </div>
-       </div>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">
+              <a (click)="navigateHome()">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Perfil da Pessoa
+            </li>
+          </ol>
+        </nav>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img
+              *ngIf="person?.urlFoto"
+              [src]="person?.urlFoto"
+              alt="avatar"
+              class="rounded-circle img-fluid"
+              style="width: 150px"
+            />
+            <img
+              *ngIf="!person?.urlFoto"
+              src="r../../../../../assets/images/Unknown_person.jpg"
+              alt="avatar"
+              class="rounded-circle img-fluid"
+              style="width: 150px"
+            />
+            <h5 class="my-3">{{ person?.nome || "Não Possui" }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nome:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  {{ person?.nome || "Não Possui" }}
+                </p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Idade:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  {{ person?.idade || "Não Possui" }}
+                </p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Sexo:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  {{ person?.sexo || "Não Possui" }}
+                </p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Vivo:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  {{ (person?.vivo ? "Sim" : "Não") || "Não Possui" }}
+                </p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Data Desaparecimento:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  {{
+                    (person?.ultimaOcorrencia?.dtDesaparecimento
+                      | date : "dd/MM/yyyy") || "Não Possui"
+                  }}
+                </p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Encontrado/Encontrado vivo:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  {{
+                    (person?.ultimaOcorrencia?.encontradoVivo
+                      ? "Sim"
+                      : "Não") || "Não Possui"
+                  }}
+                </p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Local Desaparecimento:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  {{
+                    person?.ultimaOcorrencia?.localDesaparecimentoConcat ||
+                      "Não Possui"
+                  }}
+                </p>
+              </div>
+            </div>
+            <ng-container
+              *ngIf="!!person?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO"
+            >
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Infomação:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p
+                    class="text-muted mb-0"
+                    *ngIf="
+                      person?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO
+                        ?.informacao
+                    "
+                  >
+                    {{
+                      person?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO
+                        ?.informacao || "Não Possui"
+                    }}
+                  </p>
+                  <p
+                    class="text-muted mb-0 mt-1"
+                    *ngIf="
+                      person?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO
+                        ?.vestimentasDesaparecido
+                    "
+                  >
+                    Descrição:
+                    {{
+                      person?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO
+                        ?.vestimentasDesaparecido || "Não Possui"
+                    }}
+                  </p>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <section>
-   <div class="container d-flex" style="gap: 10px">
-      <a class="btn btn__whatsapp" (click)="shareOn('WHATSAPP')">
-        <i class="bi bi-whatsapp"></i>
-        Compartilhar no WhatsApp
-      </a>
+  <div class="container d-flex" style="gap: 10px">
+    <a class="btn btn__whatsapp" (click)="shareOn('WHATSAPP')">
+      <i class="bi bi-whatsapp"></i>
+      Compartilhar no WhatsApp
+    </a>
 
-      <a class="btn btn__facebook" (click)="shareOn('FACEBOOK')">
-         <i class="bi bi-facebook"></i>
-         Compartilhar no Facebook
-       </a>
-   </div>
+    <a class="btn btn__facebook" (click)="shareOn('FACEBOOK')">
+      <i class="bi bi-facebook"></i>
+      Compartilhar no Facebook
+    </a>
+  </div>
 </section>
