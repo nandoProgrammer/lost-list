@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AbitusService {
-  BASE_URL:string = environment.baseUrl;
+  BASE_URL: string = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllPerson(filters: any): Observable<any> {
     const params = new HttpParams()
@@ -21,7 +21,9 @@ export class AbitusService {
       .set('sexo', filters.sexo)
       .set('pagina', filters.pagina);
 
-    return this.http.get<any>(`${this.BASE_URL}/pessoas/aberto/filtro`, { params });
+    return this.http.get<any>(`${this.BASE_URL}/pessoas/aberto/filtro`, {
+      params,
+    });
   }
 
   getPersonById(idPerson: string): Observable<any> {
