@@ -61,11 +61,11 @@
   </div>
 
   <!--card-->
-  <div class="container flex-row" style="gap: 15px">
+  <div *ngIf="!!personList" class="container flex-row" style="gap: 15px">
     <div
       class="card"
       *ngFor="
-        let person of response.content
+        let person of personList.content
           | paginate
             : {
                 itemsPerPage: pagination.itemsPerPage,
