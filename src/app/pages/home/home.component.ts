@@ -3,15 +3,23 @@ import { AbitusService } from '../../core/services/abitus.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NgxPaginationModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   response: any = [];
@@ -26,56 +34,55 @@ export class HomeComponent {
     nome: '',
     pagina: '',
     faixaIdadeFinal: 0,
-    faixaIdadeInicial: 0
+    faixaIdadeInicial: 0,
   };
 
   constructor(
     private apiAbitusService: AbitusService,
     private router: Router,
     private formBuilder: FormBuilder
-  ){}
+  ) {}
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.getData();
     this.createForm();
   }
 
-  private getData():void {
+  private getData(): void {
     this.filters.pagina = this.pagination.currentPage;
-    this.apiAbitusService.getAllPerson(this.filters)
-      .subscribe({
-        next: (res) => {
-          this.response = res;
-          this.pagination.totalElements = res.totalElements;
-        }, 
-        error: (error) => {
-          throw new Error(error.message);
-        }
-      })
+    this.apiAbitusService.getAllPerson(this.filters).subscribe({
+      next: (res) => {
+        this.response = res;
+        this.pagination.totalElements = res.totalElements;
+      },
+      error: (error) => {
+        throw new Error(error.message);
+      },
+    });
   }
 
-  navigateByPerson(idPerson: string):void {
+  navigateByPerson(idPerson: string): void {
     this.router.navigate([`person/${idPerson}`]);
   }
 
-  pageChange(currentPage: number):void {
+  pageChange(currentPage: number): void {
     this.pagination.currentPage = currentPage;
     this.getData();
   }
 
-  createForm():void {
-     this.formFilters = this.formBuilder.group({
-       nome: [''],
-       faixaIdadeFinal: [''],
-       faixaIdadeInicial: [''],
-       sexo: ['']
-     });
+  createForm(): void {
+    this.formFilters = this.formBuilder.group({
+      nome: [''],
+      faixaIdadeFinal: [''],
+      faixaIdadeInicial: [''],
+      sexo: [''],
+    });
   }
 
-  filterRequest():void {
+  filterRequest(): void {
     this.filters = {
       ...this.filters,
-      ...this.formFilters.value
+      ...this.formFilters.value,
     };
 
     this.getData();
