@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
+import { IFilters } from '../interfaces/filters.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class AbitusService {
 
   constructor(private http: HttpClient) {}
 
-  getAllPerson(filters: any): Observable<any> {
+  getAllPerson(filters: IFilters): Observable<any> {
     const params = new HttpParams()
       .set('faixaIdadeInicial', filters.faixaIdadeInicial)
       .set('faixaIdadeFinal', filters.faixaIdadeFinal)

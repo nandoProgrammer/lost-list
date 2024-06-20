@@ -9,6 +9,8 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { ListPerson } from '../../core/interfaces/person.interface';
+import { IFilters } from '../../core/interfaces/filters.interface';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -22,17 +24,17 @@ import {
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  response: any = [];
-  pagination: any = {
+  personList!: ListPerson;
+  pagination = {
     totalElements: 0,
     currentPage: 0,
     itemsPerPage: 12,
   };
   formFilters!: FormGroup;
-  filters: any = {
+  filters: IFilters = {
     sexo: '',
     nome: '',
-    pagina: '',
+    pagina: 0,
     faixaIdadeFinal: 0,
     faixaIdadeInicial: 0,
   };
@@ -52,7 +54,7 @@ export class HomeComponent {
     this.filters.pagina = this.pagination.currentPage;
     this.apiAbitusService.getAllPerson(this.filters).subscribe({
       next: (res) => {
-        this.response = res;
+        this.personList = res;
         this.pagination.totalElements = res.totalElements;
       },
       error: (error) => {

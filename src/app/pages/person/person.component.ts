@@ -2,58 +2,64 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbitusService } from '../../core/services/abitus.service';
 import { CommonModule } from '@angular/common';
+import { IPerson } from '../../core/interfaces/person.interface';
 
 @Component({
   selector: 'app-person',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './person.component.html',
-  styleUrl: './person.component.scss'
+  styleUrl: './person.component.scss',
 })
 export class PersonComponent {
-   idPersonRoute!: string;
-   response!: any;
+  idPersonRoute!: string;
+  person!: IPerson;
 
-   constructor(
-     private activatedRoute: ActivatedRoute,
-     private apiAbitusService: AbitusService,
-     private router: Router
-   ) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private apiAbitusService: AbitusService,
+    private router: Router
+  ) {}
 
-   ngOnInit():void {
-      this.idPersonRoute = this.activatedRoute.snapshot.params["idPerson"];
-      this.getPersonById();
-   }
+  ngOnInit(): void {
+    this.idPersonRoute = this.activatedRoute.snapshot.params['idPerson'];
+    this.getPersonById();
+  }
 
-   getPersonById():void {
-     if(!this.idPersonRoute) return;
+  getPersonById(): void {
+    if (!this.idPersonRoute) return;
 
-     this.apiAbitusService.getPersonById(this.idPersonRoute)
-       .subscribe({
-        next: (res) => {
-          this.response = res;
-        },
-        error: (error) => {
-          throw new Error(error.message)
-        }
-       })
-   }
+    this.apiAbitusService.getPersonById(this.idPersonRoute).subscribe({
+      next: (res) => {
+        this.person = res;
+      },
+      error: (error) => {
+        throw new Error(error.message);
+      },
+    });
+  }
 
-   get urlPage():string {
-     return window.location.href;
-   }
+  get urlPage(): string {
+    return window.location.href;
+  }
 
-   shareOn(share: "WHATSAPP" | "FACEBOOK"):void {
-    if(share == "WHATSAPP") {
-      window.open(`https://api.whatsapp.com/send?text=${this.urlPage}`, '_blank');
+  shareOn(share: 'WHATSAPP' | 'FACEBOOK'): void {
+    if (share == 'WHATSAPP') {
+      window.open(
+        `https://api.whatsapp.com/send?text=${this.urlPage}`,
+        '_blank'
+      );
     }
 
-    if(share == "FACEBOOK") {
-      window.open(`https://www.facebook.com/sharer/sharer.php?u=${this.urlPage}`, '_blank');
+    if (share == 'FACEBOOK') {
+      window.open(
+        `https://www.facebook.com/sharer/sharer.php?u=${this.urlPage}`,
+        '_blank'
+      );
     }
-   }
+  }
 
-   navigateHome() {
-     this.router.navigate(['']);
-   }
+  navigateHome() {
+    this.router.navigate(['']);
+  }
 }
